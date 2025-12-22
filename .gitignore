@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (never commit datasets)
+data/raw/
+data/processed/
+
+# Models (avoid committing large binaries)
+models/*.pkl
+models/*.joblib
+models/*.h5
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
