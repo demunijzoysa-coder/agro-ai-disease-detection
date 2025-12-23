@@ -131,7 +131,7 @@ agro-ai-disease-detection/
 ├── requirements.txt
 └── README.md
 
-
+---
 ##  Reproduce Training + Evaluation (One Command)
 
 This project includes a full end-to-end pipeline script that trains a model and generates evaluation reports automatically.
