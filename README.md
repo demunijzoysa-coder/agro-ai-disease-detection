@@ -130,3 +130,30 @@ agro-ai-disease-detection/
 │   └── predictions.csv
 ├── requirements.txt
 └── README.md
+
+
+##  Reproduce Training + Evaluation (One Command)
+
+This project includes a full end-to-end pipeline script that trains a model and generates evaluation reports automatically.
+
+```powershell
+# Activate venv
+.\.venv\Scripts\Activate.ps1
+
+# Train + Evaluate (creates a timestamped model + reports/)
+python src/pipeline.py --epochs 30 --tag v1
+
+
+
+```md
+## 📌 Model Card
+
+**Task:** Binary classification — `blast` vs `healthy`  
+**Model:** CNN (TensorFlow/Keras), input 224×224 RGB, sigmoid output  
+**Output semantics:** sigmoid = P(healthy), P(blast) = 1 − P(healthy)
+
+**Data:** Original leaf images only  
+**Data Integrity:** Exact duplicate images removed using hash-based deduplication before final evaluation
+
+**Evaluation:** Confusion matrix + classification report on a held-out clean test split  
+**Limitations:** Sensitive to lighting, image quality, angles; intended as decision support, not diagnosis
