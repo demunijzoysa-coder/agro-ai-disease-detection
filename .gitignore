@@ -25,3 +25,8 @@ models/*.h5
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Runtime outputs
+reports/predictions.csv
+reports/run_log.csv
+.tmp/
