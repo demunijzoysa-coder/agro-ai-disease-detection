@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parent))
+
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))         # repo root
+sys.path.insert(0, str(ROOT / "src")) # src as import root
 
 import csv
 from datetime import datetime
@@ -10,7 +13,8 @@ from datetime import datetime
 import pandas as pd
 import streamlit as st
 
-from src.predictor import load_model, predict_image
+from predictor import load_model, predict_image
+
 
 st.set_page_config(
     page_title="Rice Leaf Blast Detector",
