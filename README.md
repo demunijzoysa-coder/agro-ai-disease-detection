@@ -183,6 +183,6 @@ Outputs:
 
 ---
 ## 🔗 Live Demo
-Streamlit App: <PASTE_YOUR_STREAMLIT_URL_HERE>
+Streamlit App: 
 
 https://agro-ai-disease-detection-jshdzrx67ulnftjcryzgjm.streamlit.app/
