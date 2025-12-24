@@ -91,7 +91,7 @@ Flow:
 ---
 ## 6.1 ASCII Architecture Diagram
 
-![alt text](image.png)
+![alt text](<ASCII Architecture Diagram.png>)
 
 # Risk Score Formula Baseline (rule-based MVP)
 
