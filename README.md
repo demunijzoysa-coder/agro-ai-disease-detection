@@ -157,3 +157,6 @@ python src/pipeline.py --epochs 30 --tag v1
 
 **Evaluation:** Confusion matrix + classification report on a held-out clean test split  
 **Limitations:** Sensitive to lighting, image quality, angles; intended as decision support, not diagnosis
+
+
+- Satellite Phase design: see `docs/satellite_phase_plan.md`
