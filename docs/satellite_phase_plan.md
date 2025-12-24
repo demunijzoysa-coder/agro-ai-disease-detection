@@ -169,6 +169,80 @@ In the Streamlit app:
   - If “High risk”, recommend capturing leaf images for confirmation
 
 ---
+## 7.1 Minimal Data Schema (MVP)
+
+The satellite phase MVP can store features and scores in a simple tabular format (CSV/Parquet).
+This keeps the pipeline transparent and easy to debug.
+
+### Table: `risk_features` (one row per region/tile per date)
+
+| Column              | Type    | Example                  | Description |
+|---------------------|---------|--------------------------|-------------|
+| tile_id             | string  | `tile_0012`              | Region/tile identifier (or field_id if polygons exist) |
+| date                | date    | `2025-12-23`             | Observation date |
+| ndvi_now            | float   | `0.62`                   | NDVI at date |
+| ndvi_prev           | float   | `0.71`                   | Previous valid NDVI observation |
+| ndvi_drop           | float   | `0.60`                   | Normalized (0..1) stress component |
+| rain_7d_mm          | float   | `85.0`                   | Total rainfall last 7 days (mm) |
+| rain_component      | float   | `0.71`                   | Normalized (0..1) |
+| temp_7d_c           | float   | `27.4`                   | Mean temp last 7 days (°C) |
+| temp_component      | float   | `0.93`                   | Normalized (0..1) |
+| cloud_coverage      | float   | `0.18`                   | Fraction (0..1); used to filter observations |
+| risk_score          | float   | `73.2`                   | Final risk score (0..100) |
+| risk_band           | string  | `HIGH`                   | LOW / MEDIUM / HIGH |
+| note                | string  | `ndvi drop + wet week`   | Optional human-readable reason |
+
+### Optional Table: `ground_truth_labels` (future)
+| Column   | Type   | Example | Description |
+|----------|--------|---------|-------------|
+| tile_id  | string | tile_0012 | Match to risk_features |
+| date     | date   | 2025-12-23 | Label date |
+| blast_observed | int | 1 | Officer-confirmed label (0/1) |
+| source   | string | officer_visit | Where label came from |
+
+
+---
+## 7.2 Mock UI (Streamlit Satellite Risk Tab)
+
+The satellite extension should be presented as a **risk indicator** (not diagnosis) and connected to the leaf-photo confirmation workflow.
+
+### UI Layout (MVP)
+
+**Tab: “Satellite Risk”**
+1) **Region selector**
+   - dropdown: `tile_id` (or field/cooperative name)
+2) **Date selector**
+   - select observation date (or “latest”)
+3) **Risk indicator card**
+   - Risk Band: LOW / MEDIUM / HIGH
+   - Risk Score: 0..100
+   - Short reason text: “NDVI dropped + wet week”
+4) **Trend mini-chart (optional)**
+   - NDVI over last N observations
+   - Risk score trend over time
+5) **Action prompt**
+   - If HIGH:
+     - “High risk detected. Capture 3–5 leaf photos from different areas for confirmation.”
+     - Button: “Go to Leaf Check” (switch to existing leaf classifier tab)
+   - If MEDIUM:
+     - “Monitor. Consider sampling if symptoms appear.”
+   - If LOW:
+     - “Low risk. Continue routine monitoring.”
+
+**Tab: “Leaf Check” (Existing)**
+- Upload photo → predict blast/healthy
+- Show confidence + guidance
+- Officer/Demo modes can log outputs
+
+### UX Principles
+- Keep language simple for farmers
+- Officers can see more details (components + thresholds)
+- Students can see full feature breakdown and formula
+- Always include limitation note: “Satellite indicates stress patterns, not direct disease detection.”
+
+
+---
+
 
 ## 8. Evaluation Strategy
 ### Leaf model (already done)
