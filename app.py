@@ -9,12 +9,12 @@ import pandas as pd
 import streamlit as st
 
 # -----------------------------
-# Path setup (works on Streamlit Cloud)
+# Path setup (Streamlit Cloud safe)
 # -----------------------------
 ROOT = Path(__file__).resolve().parent
-sys.path.insert(0, str(ROOT))  # repo root so "src" is importable as a package
+sys.path.insert(0, str(ROOT / "src"))  # now we can: import predictor
 
-from src.predictor import load_model, predict_image
+from predictor import load_model, predict_image  # ✅ works when predictor.py is inside src/
 
 # -----------------------------
 # Streamlit config
