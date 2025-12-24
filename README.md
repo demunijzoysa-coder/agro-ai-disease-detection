@@ -175,3 +175,8 @@ Outputs:
 ![NDVI Time Series](reports/ndvi_risk_timeseries.png)
 
 
+### Satellite Risk Tab (Real Sentinel-2 NDVI)
+![Satellite Tab](reports/screenshots/satellite_tab.png)
+
+### Multi-Modal Workflow (Satellite → Leaf Confirmation)
+![Tabs Overview](reports/screenshots/tabs_overview.png)
