@@ -144,7 +144,7 @@ This project includes a full end-to-end pipeline script that trains a model and 
 python src/pipeline.py --epochs 30 --tag v1
 
 
-
+---
 ```md
 ## 📌 Model Card
 
@@ -160,3 +160,18 @@ python src/pipeline.py --epochs 30 --tag v1
 
 
 - Satellite Phase design: see `docs/satellite_phase_plan.md`
+
+
+---
+
+## 🛰️ Satellite Monitoring MVP (Real Sentinel-2 NDVI)
+
+This project includes a real-data satellite monitoring MVP using Google Earth Engine:
+- Extracts Sentinel-2 NDVI for a pilot region (Sri Lanka)
+- Produces a time-series plot and a baseline stress-based risk score
+
+Outputs:
+- `data/satellite/risk_features.csv`
+- `reports/ndvi_risk_timeseries.png`
+
+![NDVI Time Series](reports/ndvi_risk_timeseries.png)
