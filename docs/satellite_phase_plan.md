@@ -89,6 +89,55 @@ Flow:
 - Leaf model predicts blast/healthy → supports next steps
 
 ---
+## 6.1 ASCII Architecture Diagram
+
+![alt text](image.png)
+
+# Risk Score Formula Baseline (rule-based MVP)
+
+## 6.2 Baseline Risk Score (Rule-Based MVP)
+
+Before training any satellite ML model, we start with a transparent baseline score.
+The score is designed to be **interpretable** and safe (decision support, not diagnosis).
+
+### Inputs (per field/region tile)
+- **ΔNDVI**: recent NDVI change (drop indicates stress)
+- **Rain_7d**: total rainfall in last 7 days
+- **Temp_7d**: mean temperature in last 7 days
+- **Humidity proxy** (optional): if available; otherwise approximate using rainfall + temperature patterns
+- **Cloud_coverage**: used to ignore unreliable satellite observations
+
+### Normalization
+Convert each raw feature into a 0..1 risk component using simple clipping:
+
+- NDVI stress component:
+  - `ndvi_drop = clip((NDVI_prev - NDVI_now) / 0.15, 0, 1)`
+  - (0.15 is a tunable “large drop” scale)
+
+- Rain component:
+  - `rain = clip(Rain_7d / 120, 0, 1)`  
+  - (120mm is a tunable “very wet week” scale)
+
+- Temperature component (example sweet spot for fungal growth):
+  - `temp = 1 - clip(abs(Temp_7d - 26) / 8, 0, 1)`  
+  - (center 26°C, tolerance 8°C; tune based on agronomy references)
+
+### Baseline Score (0..100)
+A simple weighted sum:
+
+- `Risk = 100 * (0.45*ndvi_drop + 0.35*rain + 0.20*temp)`
+
+### Risk Bands (UI)
+- **0–39:** Low
+- **40–69:** Medium
+- **70–100:** High → recommend leaf-photo sampling for confirmation
+
+### Notes
+- This baseline does NOT claim “disease detection from space.”
+- It is a **stress + context** indicator to prioritize inspections and guide sampling.
+- Later, once ground truth labels exist, replace weights/rules with an ML model and evaluate properly.
+
+---
 
 ## 7. Proposed Pipeline (MVP)
 ### Step A — Data collection (MVP)
