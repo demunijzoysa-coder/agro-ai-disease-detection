@@ -12,11 +12,9 @@ import streamlit as st
 # Path setup (works on Streamlit Cloud)
 # -----------------------------
 ROOT = Path(__file__).resolve().parent
-sys.path.insert(0, str(ROOT))          # repo root
-sys.path.insert(0, str(ROOT / "src"))  # allow: import predictor
+sys.path.insert(0, str(ROOT))  # repo root so "src" is importable as a package
 
-from predictor import load_model, predict_image  # noqa: E402
-
+from src.predictor import load_model, predict_image
 
 # -----------------------------
 # Streamlit config
