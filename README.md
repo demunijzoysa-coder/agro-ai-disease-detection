@@ -180,3 +180,9 @@ Outputs:
 
 ### Multi-Modal Workflow (Satellite → Leaf Confirmation)
 ![Tabs Overview](reports/screenshots/tabs_overview.png)
+
+---
+## 🔗 Live Demo
+Streamlit App: <PASTE_YOUR_STREAMLIT_URL_HERE>
+
+https://agro-ai-disease-detection-jshdzrx67ulnftjcryzgjm.streamlit.app/
