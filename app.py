@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import sys
 from pathlib import Path
-from datetime import datetime
-import csv
+sys.path.append(str(Path(__file__).parent))
 
+import csv
+from datetime import datetime
+
+import pandas as pd
 import streamlit as st
 
 from src.predictor import load_model, predict_image
