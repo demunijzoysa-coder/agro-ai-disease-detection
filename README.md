@@ -113,7 +113,7 @@ python src/infer.py "path\to\leaf_image.jpg" --threshold 0.7
 ### 3 Run Web Application (Streamlit)
 
 ## Project Structure
-
+```
 agro-ai-disease-detection/
 │
 ├── app.py                 # Streamlit web app
@@ -130,7 +130,7 @@ agro-ai-disease-detection/
 │   └── predictions.csv
 ├── requirements.txt
 └── README.md
-
+```
 ---
 ##  Reproduce Training + Evaluation (One Command)
 
